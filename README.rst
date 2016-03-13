@@ -223,9 +223,9 @@ Setting up Kerberos Authentication
 - After installing ``pam-krb5``, it may be necessary to adjust the
   ``minimum_uid`` parameter in the pam configuration files.
 - Add ``.k5login`` files to the users' directories containing the appropriate
-  principal. For Columbia University, this should be ``abc123@CC.COLUMBIA.EDU`` 
-  to enable users to access the machine using the password associated with their 
-  UNI.
+  principal. For Columbia University, this should be ``abc123@CC.COLUMBIA.EDU``
+  (where ``abc123`` is the CUIT-assigned UNI of the user in question) to enable
+  users to access the machine using the Kerb password associated with their UNI.
 - Add users authorized to access the machine to the ``AllowUsers`` line in
   ``/etc/ssh/sshd_config``.
 
