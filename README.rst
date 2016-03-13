@@ -9,7 +9,8 @@ This document contains notes on configuring a cluster of machines with NVIDIA
 GPUs running Ubuntu Linux 14.04 or later on a private network connected to a 
 single master host that serves as the cluster's network gateway, file server, 
 and name service master. `SLURM <http://slurm.schedmd.com>`_ is used for job 
-management. 
+management, and the existence of an externally managed Kerberos KDC is assumed
+for managing user authentication.
 
 The sections of this document are not necessarily listed in a prescribed order,
 nor does the document attempt to provide all information necessary for obtaining
