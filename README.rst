@@ -255,8 +255,7 @@ Configuring SLURM
 -----------------
 - Install ``slurm-llnl`` and ``munge`` on all hosts.
 - Generate a MUNGE key on the master by running ``create-munge-key``.
-- Modify various
-  directory/file permissions as indicated in the `MUNGE Wiki 
+- Modify various directory/file permissions as indicated in the `MUNGE Wiki 
   <https://github.com/dun/munge/wiki/Installation-Guide>`_.
 - On Ubuntu 14.04, update ``/etc/default/munge`` to circumvent `this bug 
   <https://code.google.com/p/munge/issues/detail?id=31>`_.
