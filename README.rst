@@ -14,7 +14,7 @@ management.
 The sections of this document are not necessarily listed in a prescribed order,
 nor does the document attempt to provide all information necessary for obtaining
 an optimal cluster configuration. Feel free to submit suggestions/corrections as
-pull requests to `the source repository <https://github.com/neurokernel/gpu-cluster-config>`.
+pull requests to `the source repository <https://github.com/neurokernel/gpu-cluster-config>`_.
 
 The author categorically disclaims all responsibility for any adverse effects to
 your data center that may ensue as a result of following these instructions. :-)
