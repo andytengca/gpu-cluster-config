@@ -234,24 +234,19 @@ Installing CUDA
 ---------------
 - Ubuntu provides its own NVIDIA GPU driver and CUDA packages. Although you can 
   use them, the ones provided by NVIDIA are usually more up to date; read on if 
-  you want to use them.
-  
+  you want to use them.  
 - Download and install the "deb (network)" Ubuntu package from NVIDIA's `website 
   <https://developer.nvidia.com/cuda-downloads>`_.
-
 - After refreshing the system's package information using ``apt-get update``, 
   install the ``cuda-VERSION`` metapackage (e.g., ``cuda-7-5``) to install all 
   of the requisite drivers and libraries. Reboot the machine after installation.
-  
 - If the ``/dev/nvidia*`` devices fail to initialize when the machine boots and
   there appears to be a kernel module error in the output of ``dmesg``, try
   installing a more recent version of the device drivers (you may need to obtain
   it from a `third party ppa 
   <https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa>`_).
-
 - Ensure that ``nvidia-persistenced`` has been installed and is
   running - this will keep GPUs warm so as to avoid delays in startup.
-
 - Add ``/usr/local/cuda/bin`` to ``PATH`` in ``/etc/bash.bashrc`` so that all 
   users can access the CUDA binaries without having to modify their own 
   ``.bashrc`` scripts.
