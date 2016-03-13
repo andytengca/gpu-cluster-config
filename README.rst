@@ -11,6 +11,15 @@ single master host that serves as the cluster's network gateway, file server,
 and name service master. `SLURM <http://slurm.schedmd.com>`_ is used for job 
 management.
 
+Author & License
+----------------
+.. image:: https://i.creativecommons.org/l/by/4.0/88x31.png
+    :target: http://creativecommons.org/licenses/by/4.0/
+    :alt: http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License
+
+This work by Lev Givon is licensed under a 
+`Commons Attribution 4.0 International License <http://creativecommons.org/licenses/by/4.0/>`_
+
 General System Configuration
 ----------------------------
 - After installing Ubuntu, it's possible that the system's console might not 
