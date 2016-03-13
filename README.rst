@@ -18,7 +18,7 @@ Author & License
     :alt: http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License
 
 This work by Lev Givon is licensed under a 
-`Commons Attribution 4.0 International License <http://creativecommons.org/licenses/by/4.0/>`_
+`Creative Commons Attribution 4.0 International License <http://creativecommons.org/licenses/by/4.0/>`_
 
 General System Configuration
 ----------------------------
