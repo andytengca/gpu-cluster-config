@@ -55,6 +55,8 @@ General System Configuration
 
 Configuring Networking
 ----------------------
+- The below instructions assume that the worker nodes have private addresses in 
+  the 192.168.0.0/16 subnet.
 - Activate ``ufw`` on the master host and deactivate it on the worker hosts.
 - Leave the OpenSSH port on the master host open.
 - Update ``/etc/default/ufw`` to contain the line ::
@@ -63,8 +65,10 @@ Configuring Networking
 
 - Update ``/etc/ufw/sysctl.conf`` to contain the lines ::
 
-     net.ipv4.ip_forward=1
-     net.ipv6.conf.default.forwarding=1
+     net/ipv4/ip_forward=1
+     net/ipv6/conf/default/forwarding=1
+     net/ipv6/conf/all/forwarding=1
+
 - Add the following lines to the top of ``/etc/ufw/before.rules`` (replace the
   multicast address as appropriate for the private network and the interface
   with whichever interface the gateway uses to communicate with the outside
@@ -74,6 +78,11 @@ Configuring Networking
 	 :POSTROUTING ACCEPT [0:0]
 	 -A POSTROUTING -s 192.168.0.0/8 -o eth0 -j MASQUERADE
 	 COMMIT
+- Add the following rules::
+
+     ufw allow to 192.168.0.0/16
+     ufw allow from 192.168.0.0/16
+
 - After making the above modifications, restart ``ufw``::
 
      ufw disable && ufw enable
@@ -83,11 +92,19 @@ Configuring Networking
   options in ``/etc/avahi/avahi-daemon.conf``
 - On the master, make sure that avahi only announces the private hostname on the
   internal Ethernet interface associated with the private network by setting the
-  ``allow-interfaces`` option accordingly.
-- Put the hostname of each private host in its respective
+  ``allow-interfaces`` option in ``/etc/avahi/avahi-daemon.conf`` accordingly.
+- Put the hostname of each worker in its respective
   ``/etc/sysconfig/network`` file, e.g., ::
 
      HOSTNAME=node02.local
+- Add all of the worker host names and IP addresses to ``/etc/hosts`` on the 
+  master, e.g.::
+
+     192.168.0.1 node01.local    node01
+     192.168.0.2 node02.local    node02
+     192.168.0.3 node03.local    node03
+     192.168.0.4 node04.local    node04
+     192.168.0.5 node05.local    node05
 
 - Install ``isc-dhcp-server`` on the master and configure it to
   assign static private IP addresses to the workers; see the accompanying
