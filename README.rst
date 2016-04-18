@@ -253,7 +253,21 @@ Setting up Kerberos Authentication
   users to access the machine using the Kerb password associated with their UNI.
 - Add users authorized to access the machine to the ``AllowUsers`` line in
   ``/etc/ssh/sshd_config``.
+- To store the password of an account locally in ``/etc/shadow`` (e.g., to
+  ensure that the user can login even if Kerberos or LDAP are not functioning),
 
+  - temporarily disable Kerberos and LDAP authentication using
+    ``pam-auth-update``,
+  - create a temporary local password using
+    ``mkpasswd -m sha-512 -S somesaltstring -s <<< TempPassword``
+  - add a line for the account to ``/etc/passwd`` with ``vipw``
+    and a line containing the encrypted password to ``/etc/shadow`` with
+    ``vipw -s``,
+  - modify the password to whatever the user wants using ``/usr/bin/passwd``,
+  - update the account's local groups if so desired by editing ``/etc/group``
+    using ``vigr`` and ``vigr -s``, and
+  - re-enable Kerberos and LDAP authentication using ``pam-auth-update``.
+  
 Installing CUDA
 ---------------
 - Ubuntu provides its own NVIDIA GPU driver and CUDA packages. Although you can 
