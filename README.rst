@@ -9,6 +9,7 @@ This document contains notes on configuring a cluster of machines with NVIDIA
 GPUs running Ubuntu Linux 14.04 or later on a private network connected to a 
 single master host that serves as the cluster's network gateway, file server, 
 and name service master. `SLURM <http://slurm.schedmd.com>`_ is used for job 
+management, `OpenLDAP <http://www.openldap.org>`_ is used for name service 
 management, and the existence of an externally managed Kerberos KDC is assumed
 for managing user authentication.
 
@@ -41,13 +42,14 @@ General System Configuration
   Recent NVIDIA CUDA packages should automatically do the above during 
   installation, however.
 
-- Add ``umask 0077`` to ``/etc/bash.bashrc`` `before` creating any user accounts 
+- Add ``umask 0077`` to ``/etc/bash.bashrc`` *before* creating any user accounts 
   to enforce more private default file creation permissions.
 - When creating user accounts, check that the created home directory and the 
   various files created by default (e.g., ``.bashrc``, ``.profile``, etc.) are 
   not world readable.
 - If the master host contains an IPMI or BMC device for remote management 
-  exposed to the Internet, remember to set an administrator password.  This can 
+  exposed to the Internet, have your network administrator assign it a static IP 
+  address and *remember to set an administrator password*.  The latter can 
   typically be done through the web or via ``ipmitool``.
 - The IPMI devices of the remote management interfaces on the internal
   network do not need any passwords (the default username and password -
@@ -207,7 +209,7 @@ Installing libuser
   be manually built and installed as follows.
 - Install ``libsasl-dev``, ``libpython2.7-dev``, ``libldap-dev``, 
   ``libpopt-dev``, and ``libpam-dev``. Make sure that the stock ``libuser1`` 
-  package is `not` installed.
+  package is *not* installed.
 - `Download <https://fedorahosted.org/libuser/>`_ the latest ``libuser`` source, 
   unpack, and build as follows::
 
