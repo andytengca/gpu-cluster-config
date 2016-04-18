@@ -41,8 +41,11 @@ General System Configuration
   Recent NVIDIA CUDA packages should automatically do the above during 
   installation, however.
 
-- Add ``umask 0077`` to ``/etc/bash.bashrc`` to enforce more private default
-  file creation permissions.
+- Add ``umask 0077`` to ``/etc/bash.bashrc`` `before` creating any user accounts 
+  to enforce more private default file creation permissions.
+- When creating user accounts, check that the created home directory and the 
+  various files created by default (e.g., ``.bashrc``, ``.profile``, etc.) are 
+  not world readable.
 - If the master host contains an IPMI or BMC device for remote management 
   exposed to the Internet, remember to set an administrator password.  This can 
   typically be done through the web or via ``ipmitool``.
@@ -115,7 +118,7 @@ Configuring Networking
   manually clear the IP address associated with the IPMI device in the
   machine's BIOS.
 - Ostensibly, it is possible to use ``ipmitool`` to set the IPMI device
-  LAN Select setting on SuperMicro othermboards (see `this page
+  LAN Select setting on SuperMicro motherboards (see `this page
   <http://www.supermicro.com/support/faqs/faq.cfm?faq=9848>`_ for more 
   information).
 - To configure password-less login from any machine in the cluster to
@@ -203,8 +206,10 @@ Installing libuser
   stock Ubuntu package isn't compiled with LDAP support, however, it needs to
   be manually built and installed as follows.
 - Install ``libsasl-dev``, ``libpython2.7-dev``, ``libldap-dev``, 
-  ``libpopt-dev``, and ``libpam-dev``
-- Download the latest ``libuser`` source, unpack, and build as follows::
+  ``libpopt-dev``, and ``libpam-dev``. Make sure that the stock ``libuser1`` 
+  package is `not` installed.
+- `Download <https://fedorahosted.org/libuser/>`_ the latest ``libuser`` source, 
+  unpack, and build as follows::
 
      ./configure --prefix=/usr/local --with-ldap=/usr/include \
      --with-popt=/usr/include --with-sasl=/usr/include
@@ -280,7 +285,9 @@ Configuring SLURM
 - Copy the MUNGE key on the master to ``/etc/munge`` on the worker hosts.
 - Start MUNGE using ``service munge start``
 - Install the accompanying `slurm.conf <slurm.conf>`_ and `gres.conf 
-  <gres.conf>`_ files to ``/etc/slurm-llnl``; modify as appropriate.
+  <gres.conf>`_ files to ``/etc/slurm-llnl``; modify both files as appropriate.  
+  Note that ``slurm.conf`` must be the same on all nodes, but ``gres.conf`` 
+  should be customized in accordance with the actual number of GPUs on a host.
 - Run ``update-rc.d slurm-llnl enable`` to ensure that SLURM starts on reboot.
   On Ubuntu 14.04, it may be necessary to restart SLURM manually after a reboot 
   if GPU initialization does not complete before the system tries to start 
