@@ -272,12 +272,38 @@ Installing CUDA
 ---------------
 - Ubuntu provides its own NVIDIA GPU driver and CUDA packages. Although you can 
   use them, the ones provided by NVIDIA are usually more up to date; read on if 
-  you want to use them.  
-- Download and install the "deb (network)" Ubuntu package from NVIDIA's `website 
-  <https://developer.nvidia.com/cuda-downloads>`_.
-- After refreshing the system's package information using ``apt-get update``, 
-  install the ``cuda-VERSION`` metapackage (e.g., ``cuda-7-5``) to install all 
-  of the requisite drivers and libraries. Reboot the machine after installation.
+  you want to use them.
+- For versions of Ubuntu for which a ``.deb`` package is available:
+  
+  - Download and install the "deb (network)" Ubuntu package from NVIDIA's 
+    `website <https://developer.nvidia.com/cuda-downloads>`_.
+  - After refreshing the system's package information using ``apt-get update``, 
+    install the ``cuda-VERSION`` metapackage (e.g., ``cuda-7-5``) to install all 
+    of the requisite drivers and libraries. Reboot the machine after 
+    installation.
+- For more recent versions of Ubuntu for which no ``.deb`` package is available 
+  (e.g., Ubuntu 16.04 as of April 2016):
+
+  - Ensure that the most recent NVIDIA kernel drivers are installed; you can 
+    find them by installing ``aptitude`` and running the command ``aptitude 
+    search nvidia``
+  - Download and install the "runfile (local)" file from NVIDIA's
+    `website <https://developer.nvidia.com/cuda-downloads>`_.
+  - Make the file executable and run it with the ``--override`` option.
+  - When prompted by the installer as to whether to install the "Accelerated 
+    Graphics Driver", enter ``n``.
+  - Install the CUDA software in ``/usr/local/cuda-VERSION`` with a link from
+    ``/usr/local/cuda`` to that directory, where ``VERSION`` is the version of 
+    CUDA being installed.
+  - After installation is complete, ensure that that all of the contents of
+    the ``/usr/local/cuda-VERSION`` directory are world-readable (and executable 
+    where appropriate).
+  - Create a file named ``/etc/profile.d/cuda.sh`` containing the line
+    ``export PATH=$PATH:/usr/local/cuda/bin``
+  - Create a file named ``/etc/ld.so.conf.d/cuda.conf`` containing the line
+    ``/usr/local/cuda/lib64``
+  - Run the command ``sudo source /etc/profile.d/cuda.sh``
+  - Run the command ``sudo ldconfig``
 - If the ``/dev/nvidia*`` devices fail to initialize when the machine boots and
   there appears to be a kernel module error in the output of ``dmesg``, try
   installing a more recent version of the device drivers (you may need to obtain
