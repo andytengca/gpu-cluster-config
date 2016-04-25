@@ -288,7 +288,8 @@ Installing CUDA
     find them by installing ``aptitude`` and running the command ``aptitude 
     search nvidia``
   - Download and install the "runfile (local)" file from NVIDIA's
-    `website <https://developer.nvidia.com/cuda-downloads>`_.
+    `website <https://developer.nvidia.com/cuda-downloads>`_ for the most recent 
+    release of Ubuntu.
   - Make the file executable and run it with the ``--override`` option.
   - When prompted by the installer as to whether to install the "Accelerated 
     Graphics Driver", enter ``n``.
