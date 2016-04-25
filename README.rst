@@ -315,9 +315,12 @@ Installing CUDA
 - Add ``/usr/local/cuda/bin`` to ``PATH`` in ``/etc/bash.bashrc`` so that all 
   users can access the CUDA binaries without having to modify their own 
   ``.bashrc`` scripts.
-- On Ubuntu 16.04, comment out the line that starts with the text ::
+- On Ubuntu 16.04, comment out the line that contains the following text in the 
+  file
+  ``/usr/local/cuda-7.5/include/host_config.h``::
 
-     #error -- unsupported GNU version! gcc versions later than ...
+     #error -- unsupported GNU version! gcc versions later than ... not 
+     supported!
   using a C++ line comment symbol (``//``) so that CUDA works properly with gcc 
   5.  
   
