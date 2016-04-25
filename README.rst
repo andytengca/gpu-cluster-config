@@ -331,6 +331,11 @@ Configuring SLURM
   <gres.conf>`_ files to ``/etc/slurm-llnl``; modify both files as appropriate.  
   Note that ``slurm.conf`` must be the same on all nodes, but ``gres.conf`` 
   should be customized in accordance with the actual number of GPUs on a host.
+- On Ubuntu 16.04, it may be necessary to include the following lines in 
+  ``slurm.conf``::
+
+     SelectType=select/cons_res
+     SelectTypeParameters=CR_CPU_Memory
 - Run ``update-rc.d slurm-llnl enable`` to ensure that SLURM starts on reboot.
   On Ubuntu 14.04, it may be necessary to restart SLURM manually after a reboot 
   if GPU initialization does not complete before the system tries to start 
