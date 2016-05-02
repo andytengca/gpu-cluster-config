@@ -311,7 +311,9 @@ Installing CUDA
   it from a `third party ppa 
   <https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa>`_).
 - Ensure that ``nvidia-persistenced`` has been installed and is
-  running - this will keep GPUs warm so as to avoid delays in startup.
+  running - this will keep GPUs warm so as to avoid delays in startup. On Ubuntu
+  16.04, it may be necessary to create a startup script manually; see the
+  ``init`` subdirectory in `this repo <https://github.com/NVIDIA/nvidia-persistenced>`_ for details.
 - Add ``/usr/local/cuda/bin`` to ``PATH`` in ``/etc/bash.bashrc`` so that all 
   users can access the CUDA binaries without having to modify their own 
   ``.bashrc`` scripts.
