@@ -338,8 +338,11 @@ Configuring SLURM
 - Copy the MUNGE key on the master to ``/etc/munge`` on the worker hosts.
 - Start MUNGE using ``service munge start``
 - Install the accompanying `slurm.conf <slurm.conf>`_ and `gres.conf 
-  <gres.conf>`_ files to ``/etc/slurm-llnl``; modify both files as appropriate.  
-  Note that ``slurm.conf`` must be the same on all nodes, but ``gres.conf`` 
+  <gres.conf>`_ files to ``/etc/slurm-llnl``; modify both files as appropriate.
+  To find the number of CPUs (or hyperthreads, if supported), sockets, cores per socket,
+  and threads per core, run the ``lscpu`` utility; to find the GPU device files 
+  to list in ``gres.conf``, run ``ls -l /dev/nvidia?``.
+- Note that ``slurm.conf`` must be the same on all nodes, but ``gres.conf`` 
   should be customized in accordance with the actual number of GPUs on a host.
 - On Ubuntu 16.04, it may be necessary to include the following lines in 
   ``slurm.conf``::
