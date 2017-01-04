@@ -157,6 +157,7 @@ Setting up NFS
 - To export the home directories on the master node, make sure that the line ::
 
      NEED_IDMAPD=yes
+
   is in ``/etc/default/nfs-common`` on both the master and client hosts.
 - On the master, create a directory called ``/srv/nfs4/home`` on the
   master node, set its permissions to 755, and mount ``/home`` on it
@@ -166,14 +167,20 @@ Setting up NFS
 
   Modify the master's ``/etc/fstab`` file to contain ::
 
-     /srv/nfs4/home /export/home none bind 0 0
+     /home /srv/nfs4/home none bind 0 0
 - Modify ``/etc/exports`` on the master to contain ::
 
-     /srv/nfs4/home            192.168.0.0/24(rw,nohide,no_subtree_check)
+     /srv/nfs4      192.168.0.0/24(rw,fsid=0,nohide,no_subtree_check,no_root_squash)
+     /srv/nfs4/home 192.168.0.0/24(rw,nohide,no_subtree_check,no_root_squash)
+
+- Run ``exportfs -a`` on the master to export ``/srv/nfs4/home`` to the clients.
+  Run ``showmount -e 192.168.0.1`` on the clients to confirm that they can see 
+  the master's export list.
+
 - Create the directory ``/mnt/server-home`` on the clients and modify
   their ``/etc/fstab`` files to contain ::
 
-     192.168.0.1:/export/home /mnt/server-home nfs4 auto,_netdev,hard,intr 0 0
+     192.168.0.1:/home /mnt/server-home nfs4 auto,_netdev,hard,intr 0 0
 - Move ``/home`` to ``/local-home`` on all of the clients and create a link from
   ``/home`` to ``/mnt/server-home``; mount ``/mnt/server-home`` on all of
   the clients.
